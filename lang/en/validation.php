@@ -166,6 +166,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'title' => 'Post Title',
+        'body' => 'Post Details',
+        'cover' => 'Cover Image'
+    ],
 
 ];
