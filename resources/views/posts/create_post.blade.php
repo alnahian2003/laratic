@@ -6,7 +6,7 @@
 {{-- Displaying a single error --}}
 @if ($errors->has('title'))
 <div class="bg-red-100 mb-5 px-8 py-5 rounded-md text-red-600">
-    <p class="text-lg">
+    <p class="text-lg font-semibold">
         {{-- Retrieving The First Error Message For A Field --}}
         • {{$errors->first('title')}}<br/>
     </p>
@@ -37,7 +37,7 @@
 
     {{-- Post Content --}}
     <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="body">Post Details</label>
-    <textarea class="textarea textarea-bordered w-full @error('body') textarea-error @enderror" id="body" name="body" placeholder="Write post details" value="{{old('body')}}"></textarea>
+    <textarea class="textarea textarea-bordered w-full @error('body') textarea-error @enderror" id="body" name="body" placeholder="Write post details">{{old('body')}}</textarea>
 
     @error ('body')
     <span class="label-text-alt text-error">{{$message}}</span>
@@ -52,6 +52,13 @@
     @error ('cover')
     <span class="label-text-alt text-error">{{$message}}</span>
     @enderror
+
+    <div class="flex items-center my-3">
+        <label class="label cursor-pointer" for="terms">
+            <input type="checkbox" name="terms" class="checkbox" id="terms" />
+            <span class="label-text ml-3">Do you agree with our <a class="text-red-500 font-bold" href="#">terms and conditions</a>?</span>
+        </label>
+    </div>
 
     <br>
     <button type="submit" class="btn font-extrabold bg-gradient-to-l from-sky-600 to-success text-white mt-3 bottom-0 w-3/12">Let's Do It 🎉</button>

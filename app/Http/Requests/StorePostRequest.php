@@ -39,9 +39,10 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'bail|required|max:255',
+            'title' => 'required|max:255',
             'body' => 'required',
-            'cover' => 'file|max:10240|mimes:jpg,png,gif'
+            'cover' => 'sometimes|file|max:10240|mimes:jpg,png,gif|nullable',
+            'terms' => 'required|accepted'
         ];
     }
 
@@ -55,8 +56,8 @@ class StorePostRequest extends FormRequest
         return [
             'title.required' => 'A nice post title is required!',
             'title.max' => ':attribute cannot be too long!',
-
             'body.required' => 'You must write something, dude!',
+            'terms.required' => 'You must agree with our terms and conditions to proceed'
         ];
     }
 
