@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -31,16 +33,20 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\StorePostRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'bail|required|max:255',
-            'body' => 'required',
-            'cover' => 'required|file|max:10240|mimes:jpg,png,gif'
-        ]);
+        $valid = $request->safe()->merge(['author' => 'Al Nahian']);
+        // dd($valid);
+
+        // return $request->safe()->collect();
+        return $valid->collect();
+
+        // return $request->safe()->except(['title']);
+
+        // return $request->validated();
     }
 
     /**

@@ -2,10 +2,25 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
 {
+    /**
+     * Indicates if the validator should stop on the first rule failure.
+     *
+     * @var bool
+     */
+    protected $stopOnFirstFailure = false;
+
+    /**
+     * The URI that users should be redirected to if validation fails.
+     *
+     * @var string
+     */
+    // protected $redirectRoute = 'index';
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +28,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +39,34 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'bail|required|max:255',
+            'body' => 'required',
+            'cover' => 'file|max:10240|mimes:jpg,png,gif'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'A nice post title is required!',
+            'title.max' => ':attribute cannot be too long!',
+
+            'body.required' => 'You must write something, dude!',
+        ];
+    }
+
+
+    public function attributes()
+    {
+        return [
+            'title' => 'Post title',
+            'body' => 'Post details',
+            'cover' => 'Cover image',
         ];
     }
 }

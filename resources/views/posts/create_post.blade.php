@@ -2,21 +2,42 @@
 
 @section('create')
 <h3 class="text-2xl font-bold mb-5">Write a Post Instantly ✨</h3>
+
+{{-- Displaying a single error --}}
+@if ($errors->has('title'))
+<div class="bg-red-100 mb-5 px-8 py-5 rounded-md text-red-600">
+    <p class="text-lg">
+        {{-- Retrieving The First Error Message For A Field --}}
+        • {{$errors->first('title')}}<br/>
+    </p>
+</div>
+@endif
+
+{{-- Display All Errors --}}
+@if ($errors->any())
+    <div class="bg-red-500 my-5 p-8 rounded-md text-white">
+        <p class="text-xl">Errors:</p>
+        @foreach ($errors->all() as $error)
+            • {{$error}} <br>
+        @endforeach
+    </div>
+@endif
+
 {{-- Modal Form --}}
 <form action="{{route('store')}}" method="post" enctype="multipart/form-data">
     @csrf
 
     {{-- Post Title --}}
-    <label class="block mt mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file_input">Post Title</label>
-    <input type="text" name="title" placeholder="Give a post title" class="input input-bordered w-full mb-2 @error('title') input-error @enderror" value="{{old('title')}}"/>
+    <label class="block mt mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="title">Post Title</label>
+    <input type="text" name="title" id="title" placeholder="Give a post title" class="input input-bordered w-full mb-2 @error('title') input-error @enderror" value="{{old('title')}}"/>
 
     @error ('title')
     <span class="label-text-alt text-error">{{$message}}</span>
     @enderror
 
     {{-- Post Content --}}
-    <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file_input">Post Details</label>
-    <textarea class="textarea textarea-bordered w-full @error('body') textarea-error @enderror"" name="body" placeholder="Write post details" value="{{old('body')}}"></textarea>
+    <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="body">Post Details</label>
+    <textarea class="textarea textarea-bordered w-full @error('body') textarea-error @enderror" id="body" name="body" placeholder="Write post details" value="{{old('body')}}"></textarea>
 
     @error ('body')
     <span class="label-text-alt text-error">{{$message}}</span>
