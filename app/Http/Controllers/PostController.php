@@ -15,6 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        // abort(404, "I'm gonna pay you $100 to fu*k off!");
         return view('posts.all_posts');
     }
 

@@ -29,7 +29,7 @@
 
     {{-- Post Title --}}
     <label class="block mt mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="title">Post Title</label>
-    <input type="text" name="title" id="title" placeholder="Give a post title" class="input input-bordered w-full mb-2 @error('title') input-error @enderror" value="{{old('title')}}"/>
+    <input type="text" name="title" id="title" placeholder="Give a post title" class="input input-bordered w-full focus:border-green-500 mb-2 @error('title') input-error @enderror" value="{{old('title')}}"/>
 
     @error ('title')
     <span class="label-text-alt text-error">{{$message}}</span>
@@ -37,7 +37,7 @@
 
     {{-- Post Content --}}
     <label class="block mt-5 mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="body">Post Details</label>
-    <textarea class="textarea textarea-bordered w-full @error('body') textarea-error @enderror" id="body" name="body" placeholder="Write post details">{{old('body')}}</textarea>
+    <textarea class="textarea textarea-bordered w-full focus:border-green-500 @error('body') textarea-error @enderror" id="body" name="body" placeholder="Write post details">{{old('body')}}</textarea>
 
     @error ('body')
     <span class="label-text-alt text-error">{{$message}}</span>
