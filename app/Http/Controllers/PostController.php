@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -16,6 +17,8 @@ class PostController extends Controller
     public function index()
     {
         // abort(404, "I'm gonna pay you $100 to fu*k off!");
+        Log::debug("Let's rock and roll!");
+        Log::emergency('the system is down!!!');
         return view('posts.all_posts');
     }
 
@@ -43,7 +46,10 @@ class PostController extends Controller
         // dd($valid);
 
         // return $request->safe()->collect();
-        return $valid->collect();
+        Log::info('New post created', [
+            'title' => $valid->title,
+        ]);
+        return $valid;
 
         // return $request->safe()->except(['title']);
 
