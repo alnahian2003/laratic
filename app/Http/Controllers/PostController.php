@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -45,9 +46,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $valid = $request->safe()->merge(['author' => 'Al Nahian']);
+        $valid = $request->validated();
 
-        return $valid;
+        // Upload logo to file
+        if ($request->hasFile('cover')) {
+            $valid['cover'] = $request->file('cover')->store('cover', 'public');
+        }
+
+        // Set the user_id column to the current auth user id
+        $valid['user_id'] = auth()->id();
+
+        if (Post::create($valid)) {
+            return redirect('/');
+        }
+
+        return back()->withInput();
     }
 
     /**

@@ -41,8 +41,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'body' => 'required',
-            'cover' => 'sometimes|file|max:10240|mimes:jpg,png,gif|nullable',
-            'terms' => 'required|accepted'
+            'cover' => 'image|max:10240|mimes:jpg,png,gif',
         ];
     }
 
@@ -57,7 +56,6 @@ class StorePostRequest extends FormRequest
             'title.required' => 'A nice post title is required!',
             'title.max' => ':attribute cannot be too long!',
             'body.required' => 'You must write something, dude!',
-            'terms.required' => 'You must agree with our terms and conditions to proceed'
         ];
     }
 
