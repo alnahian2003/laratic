@@ -16,9 +16,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        // abort(404, "I'm gonna pay you $100 to fu*k off!");
-        Log::debug("Let's rock and roll!");
-        Log::emergency('the system is down!!!');
         return view('posts.all_posts');
     }
 
@@ -43,17 +40,8 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $valid = $request->safe()->merge(['author' => 'Al Nahian']);
-        // dd($valid);
-
-        // return $request->safe()->collect();
-        Log::info('New post created', [
-            'title' => $valid->title,
-        ]);
+ 
         return $valid;
-
-        // return $request->safe()->except(['title']);
-
-        // return $request->validated();
     }
 
     /**
