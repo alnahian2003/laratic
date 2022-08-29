@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -45,6 +46,9 @@ class UserController extends Controller
         // Attempt the user to login
         if (auth()->attempt($validated, $remember)) {
             session()->regenerate();
+
+            Log::info("New User Logged In", $validated['username']);
+
             return redirect()->intended();
         }
 
@@ -74,7 +78,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->only(['username', 'password', 'password_confirmation']), [
-            'username' => 'required|unique:users,username|min:3|max:50|alpha',
+            'username' => 'required|unique:users,username|min:3|max:50',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6'
         ]);
@@ -87,11 +91,16 @@ class UserController extends Controller
         $validated = $validator->safe()->only(['username', 'password']);
         $validated['password'] = bcrypt($validated['password']); // hash the passsword
 
+        // Generate an Unique Name for the user
+        $validated['name'] = uniqid('User_');
+
         // Create the user with validated values
         $user = User::create($validated);
 
         // Login the registered user
         auth()->login($user, true);
+
+        Log::info('A New User Has Been Registered', $validated['username']);
 
         return redirect()->intended();
     }
@@ -136,8 +145,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function logout(User $user)
     {
-        //
+        auth('auth')->logout($user);
+        session()->regenerateToken();
+
+        Log::info("An User Just Logged Out", $user);
+
+        return redirect()->intended();
     }
 }
