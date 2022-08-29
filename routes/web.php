@@ -19,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('login', 'index')->name('login');
-    Route::post('login', 'login')->name('auth.login');
+    Route::middleware('guest')->group(function () {
+        Route::get('login', 'index')->name('login');
+        Route::post('login', 'login')->name('auth.login');
 
-    Route::get('register', 'create')->name('register');
-    Route::post('register', 'store')->name('auth.register');
+        Route::get('register', 'create')->name('register');
+        Route::post('register', 'store')->name('auth.register');
+    });
 });
 
 Route::resource("/", PostController::class)->middleware('auth');
