@@ -147,11 +147,14 @@ class UserController extends Controller
      */
     public function logout(User $user)
     {
-        auth('auth')->logout($user);
-        session()->regenerateToken();
+        if (auth()->check()) {
+            auth()->logout($user);
+            session()->regenerateToken();
 
-        Log::info("An User Just Logged Out", $user);
+            Log::info("An User Just Logged Out", $user->username);
+        }
 
-        return redirect()->intended();
+
+        return redirect('/');
     }
 }

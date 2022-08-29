@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +46,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $valid = $request->safe()->merge(['author' => 'Al Nahian']);
- 
+
         return $valid;
     }
 

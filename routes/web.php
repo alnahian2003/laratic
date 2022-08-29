@@ -26,6 +26,8 @@ Route::controller(UserController::class)->group(function () {
         Route::get('register', 'create')->name('register');
         Route::post('register', 'store')->name('auth.register');
     });
+
+    Route::get('logout', 'logout');
 });
 
-Route::resource("/", PostController::class)->middleware('auth');
+Route::resource("/", PostController::class);
