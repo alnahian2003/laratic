@@ -4,6 +4,15 @@
 <h1 class="text-center text-4xl text-white font-bold mb-10">Login to Your Account</h1>  
 {{-- Modal Form --}}
 <form action="{{route('auth.login')}}" method="post">
+    {{-- Displaying a single error --}}
+    @if ($errors->has('login_error_message'))
+    <div class="bg-red-100 mb-5 px-8 py-5 rounded-md text-red-600">
+        <p class="text-lg font-semibold">
+            {{-- Retrieving The First Error Message For A Field --}}
+            • {{$errors->first('login_error_message')}}<br/>
+        </p>
+    </div>
+    @endif
     @csrf
 
     {{-- username --}}
