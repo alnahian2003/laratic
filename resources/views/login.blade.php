@@ -1,9 +1,9 @@
 @extends('posts/template')
 
-@section('create')  
+@section('account')  
 <h1 class="text-center text-4xl text-white font-bold mb-10">Login to Your Account</h1>  
 {{-- Modal Form --}}
-<form action="{{route('store')}}" method="post">
+<form action="{{route('auth.login')}}" method="post">
     @csrf
 
     {{-- username --}}
@@ -46,6 +46,6 @@
     </div>
 
     <br>
-    <button type="submit" class="btn font-extrabold bg-gradient-to-l from-sky-600 to-success text-white bottom-0 w-3/12">Let's Do It 🎉</button>
+    <button type="submit" class="btn font-extrabold bg-gradient-to-l from-sky-600 to-success text-white bottom-0">Let's Do It 🎉</button>
 </form>
 @endsection

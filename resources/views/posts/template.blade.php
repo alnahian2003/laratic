@@ -28,6 +28,13 @@
         </div>
     @endif
 
+    {{-- Login/Register --}}
+    @hasSection ('account')
+        <div class="container rounded-xl bg-opacity-80 backdrop-blur-2xl max-w-lg my-10 mx-auto p-10 bg-neutral">
+            @yield('account')
+        </div>
+    @endif
+
     {{-- Hide the create post modal if the current page is route('create') --}}
     @if (!request()->routeIs('create'))
     <input type="checkbox" id="create-post-modal" class="modal-toggle" />
