@@ -47,7 +47,7 @@ class UserController extends Controller
         if (auth()->attempt($validated, $remember)) {
             session()->regenerate();
 
-            Log::info("New User Logged In", $validated['username']);
+            Log::info("A New User Just Logged In", [$validated['username']]);
 
             return redirect()->intended();
         }
@@ -100,7 +100,7 @@ class UserController extends Controller
         // Login the registered user
         auth()->login($user, true);
 
-        Log::info('A New User Has Been Registered', $validated['username']);
+        Log::info('A New User Has Been Registered', [$validated['username']]);
 
         return redirect()->intended();
     }
@@ -151,7 +151,7 @@ class UserController extends Controller
             auth()->logout($user);
             session()->regenerateToken();
 
-            Log::info("An User Just Logged Out", $user->username);
+            Log::info("An User Just Logged Out");
         }
 
 
