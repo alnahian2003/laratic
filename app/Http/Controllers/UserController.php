@@ -74,7 +74,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->only(['username', 'password', 'password_confirmation']), [
-            'username' => 'required|unique:users,username|min:3|max:50',
+            'username' => 'required|unique:users,username|min:3|max:50|alpha',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6'
         ]);
