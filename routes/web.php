@@ -26,4 +26,4 @@ Route::controller(UserController::class)->group(function () {
     Route::post('register', 'store')->name('auth.register');
 });
 
-Route::resource("/", PostController::class);
+Route::resource("/", PostController::class)->middleware('auth');

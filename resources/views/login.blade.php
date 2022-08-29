@@ -31,7 +31,7 @@
     <span class="label-text-alt text-error">{{$message}}</span>
     @enderror
 
-    {{-- username --}}
+    {{-- Password --}}
     <label
     class="block mt-4 mb-2 text-sm font-medium"
     for="password">Password</label>

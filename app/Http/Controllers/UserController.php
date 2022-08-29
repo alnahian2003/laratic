@@ -22,13 +22,14 @@ class UserController extends Controller
 
     /**
      * Attempt to login a user
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
     {
         $validator = Validator::make($request->only(['username', 'password']), [
-            'username' => 'required|unique:users,username|min:3|max:50',
+            'username' => 'required|min:3|max:50',
             'password' => 'required|min:4',
         ]);
 
@@ -59,7 +60,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('register', [
+            'title' => 'Create a New Account'
+        ]);
     }
 
     /**
@@ -70,7 +73,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->only(['username', 'password', 'password_confirmation']), [
+            'username' => 'required|unique:users,username|min:3|max:50',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return to_route('register')->withErrors($validator)->withInput()->exceptInput('password', 'password_confirmation');
+        }
+
+        // Get the validated inputs
+        $validated = $validator->safe()->only(['username', 'password']);
+        $validated['password'] = bcrypt($validated['password']); // hash the passsword
+
+        // Create the user with validated values
+        $user = User::create($validated);
+
+        // Login the registered user
+        auth()->login($user, true);
+
+        return redirect()->intended();
     }
 
     /**
