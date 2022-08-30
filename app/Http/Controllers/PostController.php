@@ -15,6 +15,8 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('index');
+
+        // $this->authorizeResource(Post::class, 'post');
     }
 
     /**
@@ -86,13 +88,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Post $post)
     {
         // if (!Gate::allows('delete-post', $post)) {
         //     abort(403);
         // }
-        Gate::allowIf(fn ($user) => $user->id === $post->user_id); //inline gate
-        return view('register', ['title' => 'Edit Post', 'post' => $post]); // for now {testing purpose}
+        // Gate::allowIf(fn ($user) => $user->id === $post->user_id); //inline gate
+        // return view('register', ['title' => 'Edit Post', 'post' => $post]); // for now {testing purpose}
+
+        if ($this->authorize('update', $post)) {
+            return "You can edit this post";
+        }
+        // if ($request->user()->cannot('update', $post)) {
+        //     abort(403);
+        // } else {
+        //     return 'yes you can edit this post';
+        // }
+
+        // $response = Gate::authorize('update', $post);
+        // if ($response->allowed()) {
+        //     return "You can edit this post";
+        // } else {
+        //     return $response->message();
+        // }
     }
 
     /**
@@ -102,7 +120,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
     }
 
@@ -112,7 +130,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         //
     }
