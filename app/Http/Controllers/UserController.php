@@ -54,7 +54,7 @@ class UserController extends Controller
 
         return back()->withErrors([
             'login_error_message' => "Something wasn't right! Please try again."
-        ]);
+        ])->exceptInput('password');
     }
 
     /**
