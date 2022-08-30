@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,9 +86,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        if (!Gate::allows('delete-post', $post)) {
+            abort(403);
+        }
+        
+        return view('register', ['title' => 'Edit Post', 'post' => $post]); // for now {testing purpose}
     }
 
     /**
@@ -99,7 +104,6 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
