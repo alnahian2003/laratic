@@ -11,6 +11,6 @@
     <figure class="mt-8">
         <img class="mx-auto max-w-lg rounded-lg" src="https://i.imgflip.com/34is30.jpg" alt="404 Not Found">
     </figure>
-    <button class="my-8 btn btn-success" onclick="window.location='{{ route('index') }}'">🔙 Return to Home</button>
+    <button class="my-8 btn btn-success" onclick="window.location='{{ route('posts.index') }}'">🔙 Return to Home</button>
 </body>
 </html>

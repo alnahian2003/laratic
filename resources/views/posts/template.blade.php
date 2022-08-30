@@ -13,8 +13,8 @@
         <div class="container rounded-xl bg-opacity-80 backdrop-blur-2xl max-w-5xl my-10 mx-auto p-10 bg-neutral" id="post_container">
             <div class="text-sm breadcrumbs">
                 <ul>
-                  <li><a href="{{route('index')}}">Home</a></li> 
-                  <li><a href="{{route('create')}}">Create</a></li>
+                  <li><a href="{{route('posts.index')}}">Home</a></li> 
+                  <li><a href="{{route('posts.create')}}">Create</a></li>
                 </ul>
             </div>
             @yield('posts')

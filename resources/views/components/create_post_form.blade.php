@@ -1,5 +1,5 @@
 {{-- Modal Form --}}
-<form action="{{route('store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
     @csrf
 
     {{-- Post Title --}}

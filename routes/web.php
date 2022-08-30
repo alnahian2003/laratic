@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource("posts", PostController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::middleware('guest')->group(function () {
@@ -30,4 +31,3 @@ Route::controller(UserController::class)->group(function () {
     Route::get('logout', 'logout');
 });
 
-Route::resource("/", PostController::class);
