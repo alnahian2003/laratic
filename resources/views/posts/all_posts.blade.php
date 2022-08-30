@@ -8,7 +8,7 @@
             <!-- Post -->
             <article class="post my-10 border-b border-b-white/20
             ">
-                <a href="#">
+                <a href="{{route('posts.show', $post->id)}}">
                     <h2 class="text-secondary-content hover:text-success text-2xl font-bold mb-4">{{str()->limit($post->title, 60)}}</h2>
                 </a>
 
@@ -57,7 +57,7 @@
                     </a>
                 </div>
             </article>
-            
+
         @empty
         <h1 class="text-5xl font-extrabold pb-5 text-transparent bg-clip-text bg-gradient-to-l from-sky-600 to-success border-b border-b-white/10">No Posts Available</h1>
         @endforelse

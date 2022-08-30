@@ -44,11 +44,10 @@
         
         <h3 class="text-2xl font-bold mb-5">Write a Post Instantly ✨</h3>
         @include('components/create_post_form')
+        
+     </div>
+    </div>
     @endif
-
-  </div>
-</div>
-
 
 @include('components/bottom_navbar')
 </body>
