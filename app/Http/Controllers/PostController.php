@@ -88,10 +88,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        if (!Gate::allows('delete-post', $post)) {
-            abort(403);
-        }
-        
+        // if (!Gate::allows('delete-post', $post)) {
+        //     abort(403);
+        // }
+        Gate::allowIf(fn ($user) => $user->id === $post->user_id); //inline gate
         return view('register', ['title' => 'Edit Post', 'post' => $post]); // for now {testing purpose}
     }
 
