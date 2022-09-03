@@ -4,7 +4,10 @@
 
 — alnahian2003
 
-31 Aug, 2022 (12:20 PM) — Just finished the Security chapter. Learned a lot stuffs but I still think that I'm just less than halfway there. More to learn, Long to go!
+31 Aug, 2022 (12:20 AM) — Just finished the Security chapter. Learned a lot stuffs but I still think that I'm just less than halfway there. More to learn, Long to go!
 My next target will be exploring the "Digging Deeper" chapter by next week, and It's a challenge to myself!
 Besides, I will practice and watch tuts on other fundamentals like OOP, Mastering MySQL, Learning Something New Everyday, Learning From Courses like InDeptLaravel, and others.
 Best Wishes!
+
+
+3 Sep, 2022 (12:21 PM) — Uh Damn no... I was wrong. 'Digging Deeper' chapter is really quaite a difficult part. So I should skip it for now. I started from the 'Database' chapter. It's a bit easy for me to get started as I have some basic fundamentals clear.
