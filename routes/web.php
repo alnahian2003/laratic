@@ -55,8 +55,8 @@ Route::get('/reset-password/{token}', function ($token) {
 })->middleware('guest')->name('password.reset');
 
 
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
 Route::post('/reset-password', function (Request $request) {
@@ -80,7 +80,6 @@ Route::post('/reset-password', function (Request $request) {
     return $status === Password::PASSWORD_RESET
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
-        
 })->middleware('guest')->name('password.update');
 
 
@@ -88,3 +87,8 @@ Route::post('/reset-password', function (Request $request) {
 
 
 Route::get('/', [PostController::class, 'index']);
+
+
+Route::get('db', function () {
+    return DB::table('posts')->get()->dd();
+});
