@@ -6,17 +6,19 @@
     </button>
 
 
-    @if (!request()->routeIs('posts.create'))
+    @auth
+        @if (!request()->routeIs('posts.create'))
         {{-- Create Button With Modal --}}
-    <button class="hover:bg-base-300 hover:bg-opacity-50">
+        <button class="hover:bg-base-300 hover:bg-opacity-50">
         <label role="button" for="create-post-modal" class="w-full px-5">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span class="btm-nav-label">Create</span>
         </label>
-    </button>
-    @endif
+        </button>
+        @endif
+    @endauth
 
     <button class="{{request()->routeIs('login') ? 'active bg-neutral bg-opacity-60' : ''}} hover:bg-base-300 hover:bg-opacity-50" onclick="window.location='{{route('login')}}'">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

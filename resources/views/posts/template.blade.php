@@ -10,7 +10,7 @@
 </head>
 <body>
     @hasSection ('posts')
-        <div class="container rounded-xl bg-opacity-80 backdrop-blur-2xl max-w-5xl my-10 mx-auto p-10 bg-neutral" id="post_container">
+        <div class="container rounded-xl bg-opacity-80 backdrop-blur-2xl max-w-5xl my-10 mx-auto p-10 bg-neutral mb-40" id="post_container">
             <div class="text-sm breadcrumbs">
                 <ul>
                   <li><a href="{{route('posts.index')}}">Home</a></li> 

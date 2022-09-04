@@ -38,7 +38,6 @@ Route::get('/forgot-password', function () {
     return view('forgot-password')->with('title', 'Reset Your Password');
 })->middleware('guest')->name('password.request');
 
-
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
 
@@ -54,8 +53,6 @@ Route::post('/forgot-password', function (Request $request) {
 Route::get('/reset-password/{token}', function ($token) {
     return view('reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
-
-
 
 Route::post('/reset-password', function (Request $request) {
     $request->validate([
@@ -79,7 +76,6 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-
 
 
 

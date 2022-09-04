@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
 
         // $this->authorizeResource(Post::class, 'post');
     }
@@ -26,8 +26,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::orderBy('created_at', 'desc')->paginate(1)->withQueryString();
+
         return view('posts.all_posts', [
-            'posts' => Post::orderBy('created_at', 'desc')->get(),
+            'posts' => $posts,
         ]);
     }
 
