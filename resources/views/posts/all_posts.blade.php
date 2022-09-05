@@ -12,7 +12,7 @@
             <article class="post my-10 border-b border-b-white/20
             ">
                 <a href="{{route('posts.show', $post->id)}}">
-                    <h2 class="text-secondary-content hover:text-success text-2xl font-bold mb-4 break-words">{{str()->limit($post->title, 60)}}</h2>
+                    <h2 class="text-secondary-content hover:text-success text-2xl font-bold mb-4 break-words leading-normal">{{str()->limit($post->title, 60)}}</h2>
                 </a>
 
                 <!-- Metadata -->
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Post Excerpt -->
-                <p class="post-content text-neutral-content my-5">
+                <p class="post-content text-neutral-content my-5 leading-loose">
                     {{str()->words($post->body, 40)}}
                 </p>
     

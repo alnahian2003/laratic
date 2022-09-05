@@ -4,7 +4,7 @@
     <section id="post">
             <!-- Post -->
             <article class="post my-10 border-b border-b-white/20">
-                <h1 class="text-5xl font-extrabold pb-5 text-transparent bg-clip-text bg-gradient-to-l from-sky-600 to-success border-b mb-5 border-b-white/10 break-words">{{$post->title}}</h1>
+                <h1 class="text-5xl font-extrabold pb-5 text-transparent bg-clip-text bg-gradient-to-l from-sky-600 to-success border-b mb-5 border-b-white/10 break-words leading-normal">{{$post->title}}</h1>
 
                 <!-- Metadata -->
                 <div class="metadata text-secondary-content flex flex-wrap gap-6">
@@ -51,7 +51,7 @@
                 @endif
 
                 <!-- Post Content -->
-                <p class="post-content text-neutral-content my-3">
+                <p class="post-content text-neutral-content mt-3 leading-loose">
                     {{ $post->body }}
                 </p>
             </article>
