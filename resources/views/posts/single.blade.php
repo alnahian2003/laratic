@@ -44,10 +44,10 @@
 
                 {{-- Post Cover Image (Only if exists) --}}
                 @if ($post->cover !== null && file_exists(public_path('storage/'.$post->cover)))
-                    <img class="max-w-full mx-auto rounded-lg object-cover" src="{{asset('storage/'.$post->cover)}}" alt="Post By {{$post->user->name}}">
+                    <img class="max-w-full mx-auto rounded-lg object-cover" src="{{asset('storage/'.$post->cover)}}" alt="Post By {{$post->user->name}}" loading="lazy">
 
                 @elseif($post->cover !== null)
-                <img class="max-w-full mx-auto rounded-lg object-cover" src="{{$post->cover}}" alt="Post By {{$post->user->name}}">
+                <img class="max-w-full mx-auto rounded-lg object-cover" src="{{$post->cover}}" alt="Post By {{$post->user->name}}" loading="lazy">
                 @endif
 
                 <!-- Post Content -->
