@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->longText('cover')->nullable();
+            $table->bigInteger('views')->after('cover')->default(0);
             $table->timestamps();
         });
     }
