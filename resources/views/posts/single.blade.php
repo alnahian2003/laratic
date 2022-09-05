@@ -30,6 +30,8 @@
                         </small>
                     </a>
 
+                    <x-total-views :views="$post->views"/>
+
                     {{-- Tags --}}
                     <div class="cta mb-8 text-secondary-content flex flex-row justify-between">
                         <div class="tags flex flex-row gap-3">

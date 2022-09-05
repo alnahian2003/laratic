@@ -25,7 +25,7 @@
                     </small>
 
                     <!-- Author -->
-                    <a href="#" class="hover:text-success hover:transition-all">
+                    <a href="#{{$post->user->username}}" class="hover:text-success hover:transition-all">
                         <small class="date flex gap-1">
                             <span class="person">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -35,6 +35,8 @@
                             {{$post->user->username}}
                         </small>
                     </a>
+
+                    <x-total-views :views="$post->views"/>
                 </div>
 
                 <!-- Post Excerpt -->
