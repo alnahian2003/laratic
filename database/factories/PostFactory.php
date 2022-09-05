@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'user_id' => User::factory()->create(),
             'title' => fake()->realText(60),
             'body' => fake()->realText(600),
+            'cover' => fake()->imageUrl(800, 400),
             'views' => rand(1000, 10000),
         ];
     }
