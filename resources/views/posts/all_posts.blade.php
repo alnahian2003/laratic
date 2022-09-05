@@ -1,7 +1,10 @@
 @extends('posts/template')
 
 @section('posts')
+    {{-- Display This Title Only When Posts Are Exists --}}
+    @if (!empty($posts))
     <h1 class="text-5xl font-extrabold pb-5 text-transparent bg-clip-text bg-gradient-to-l from-sky-600 to-success border-b border-b-white/10">Latest Posts</h1>
+    @endif
 
     <section id="posts">
         @forelse ($posts as $post)
