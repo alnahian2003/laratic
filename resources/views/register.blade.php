@@ -59,5 +59,9 @@
 
     <br>
     <button type="submit" class="btn font-bold bg-gradient-to-l mt-4 from-sky-600 to-success text-white bottom-0">Let's Proceed 😍</button>
+
+    <p class="text-center mt-8">
+        <a class="link-accent" href="{{route('login')}}">Already have an account? <span class="font-bold">Login</span></a>
+    </p>
 </form>
 @endsection
