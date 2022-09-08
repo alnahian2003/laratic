@@ -84,5 +84,11 @@ Route::get('/', [PostController::class, 'index']);
 
 
 Route::get('db', function () {
-    return DB::table('posts')->get()->dd();
+
+    foreach (App\Models\Post::lazy() as $post) {
+        print_r($post);
+    }
+
+    // return App\Models\Post::simplePaginate(5);
+    // return DB::table('posts')->get()->dd();
 });
