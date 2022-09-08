@@ -75,6 +75,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // Increment the post view
+        $post->update([$post->views++]);
+        
         return view('posts.single', [
             'title' => $post->title,
             'post' => $post,
