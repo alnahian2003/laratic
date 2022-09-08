@@ -25,13 +25,25 @@ class Post extends Model
 
     /**
      * Setting a custom database connection
+     * 
      * @var string
      */
     protected $connection = 'sqlite';
 
-/**
- * Defining Fillable Properties For Massive Assignment
- */
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'views' => 0 // new post views will set to 0
+    ];
+
+    /**
+     * Defining Fillable Properties For Massive Assignment
+     * 
+     * @var array
+     */
     protected $fillable = [
         'title',
         'user_id',
