@@ -22,8 +22,16 @@ class Post extends Model
      * @var string
      */
     protected $primaryKey = 'id';
-    
 
+    /**
+     * Setting a custom database connection
+     * @var string
+     */
+    protected $connection = 'sqlite';
+
+/**
+ * Defining Fillable Properties For Massive Assignment
+ */
     protected $fillable = [
         'title',
         'user_id',
