@@ -16,6 +16,14 @@ class Post extends Model
      */
     protected $table = 'posts';
 
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id';
+    
+
     protected $fillable = [
         'title',
         'user_id',
