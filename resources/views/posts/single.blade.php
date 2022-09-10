@@ -5,8 +5,9 @@
             <!-- Post -->
             <article class="post my-10 border-b border-b-white/20">
                 @if($post->user_id == auth()->user()->id)
-                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm">edit Post</a>
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline">edit Post</a>
                 @endif
+
                 <h1 class="text-5xl font-extrabold pb-5 text-transparent bg-clip-text bg-gradient-to-l from-sky-600 to-success border-b mb-5 border-b-white/10 break-words leading-normal">{{$post->title}}</h1>
 
                 <!-- Metadata -->

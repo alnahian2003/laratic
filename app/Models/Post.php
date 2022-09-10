@@ -25,7 +25,7 @@ class Post extends Model
 
     /**
      * Setting a custom database connection
-     * 
+     *
      * @var string
      */
     protected $connection = 'sqlite';
@@ -41,7 +41,7 @@ class Post extends Model
 
     /**
      * Defining Fillable Properties For Massive Assignment
-     * 
+     *
      * @var array
      */
     protected $fillable = [
