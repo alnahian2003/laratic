@@ -161,3 +161,11 @@ Route::get('search/{search?}', function ($search = '') {
         ->latest()
         ->firstOrFail();
 });
+
+Route::get('delete', function () {
+    // Deleting An Existing Model By Its Primary Key
+    if(\App\Models\Post::destroy( collect([1,2,3]) )) {
+        return "Posts Deleted";
+    }
+        return "Posts Doesn't Exists";
+});
