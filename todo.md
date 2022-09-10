@@ -12,3 +12,6 @@ Best Wishes!
 3 Sep, 2022 (12:21 PM) — Uh Damn no... I was wrong. 'Digging Deeper' chapter is really quite a difficult part. So I should skip it for now. I started from the 'Database' chapter. It's a bit easy for me to get started as I have some fundamentals clear.
 
 6 Sep, 2022 (1:41 AM) — Alright, Finally the 'Database' chapter is almost done. I mean, I didn't really look into these topics: Getting Started, Redis cause these seemed quite a bit difficult and advanced topic to me. So I simply left them for further study. Now, finally I'm going to begin the chapter 'Eloquent ORM' soon.
+
+
+10 Sep, 2022 (:16 PM) — Already started walking through the great 'Eloquent ORM' chapter. Completed a few subchapters (paused before the Soft Deleting subchapter). I just realized that the entire Eloquent ORM chapter is quite huge and well detailed documented. So I need to be patience and read, code & practice along. I'll continue my learning...
