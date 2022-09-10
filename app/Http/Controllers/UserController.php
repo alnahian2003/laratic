@@ -23,7 +23,7 @@ class UserController extends Controller
 
     /**
      * Attempt to login a user
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -89,9 +89,9 @@ class UserController extends Controller
 
         // Get the validated inputs
         $validated = $validator->safe()->only(['username', 'password']);
-        $validated['password'] = bcrypt($validated['password']); // hash the passsword
+        $validated['password'] = bcrypt($validated['password']); // hash the password
 
-        // Generate an Unique Name for the user
+        // Generate a Unique Name for the user
         $validated['name'] = uniqid('User_');
 
         // Create the user with validated values
@@ -149,11 +149,12 @@ class UserController extends Controller
     {
         if (auth()->check()) {
             auth()->logout($user);
+            session()->flush();
+            session()->invalidate();
             session()->regenerateToken();
 
             Log::info("An User Just Logged Out");
         }
-
 
         return redirect('/');
     }
