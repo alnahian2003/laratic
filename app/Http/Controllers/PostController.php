@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -96,10 +102,11 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Application|Factory|View
+     * @throws AuthorizationException
      */
-    public function edit(Request $request, Post $post)
+    public function edit(Post $post)
     {
         // if (!Gate::allows('delete-post', $post)) {
         //     abort(403);
@@ -108,7 +115,10 @@ class PostController extends Controller
         // return view('register', ['title' => 'Edit Post', 'post' => $post]); // for now {testing purpose}
 
         if ($this->authorize('update', $post)) {
-            return "You can edit this post";
+            return view('posts.edit', [
+                'title'=>'Edit Post',
+                'post'=> $post,
+            ]);
         }
         // if ($request->user()->cannot('update', $post)) {
         //     abort(403);
@@ -127,12 +137,38 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Post $post
+     * @return RedirectResponse
      */
     public function update(Request $request, Post $post)
     {
+        if ($post->user_id === auth()->user()->id){
+            $validator = Validator::make($request->all(),
+                [
+                    'title' => 'required|max:255',
+                    'body' => 'required',
+                    'cover' => 'image|max:10240|mimes:jpg,png,gif',
+                ]);
+
+            if ($validator->fails()){
+                return back()->withErrors($validator)->withInput();
+            }
+
+            // get the fresh validated input
+            $valid = $validator->validated();
+            // Upload logo to file
+            if ($request->hasFile('cover')) {
+                $valid['cover'] = $request->file('cover')->store('cover', 'public');
+            }
+
+            if (Post::where('id', $post->id)->update($valid)) {
+                // redirect to the updated post
+                return to_route('posts.show', $post->id);
+            }
+        }
+
+        return to_route('posts.index');
     }
 
     /**
