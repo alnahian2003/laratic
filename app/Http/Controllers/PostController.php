@@ -64,6 +64,15 @@ class PostController extends Controller
             return redirect('/');
         }
 
+        /* We can use the insert() method to store as well */
+//        $post = new Post;
+//        $post->title = $valid['title'];
+//        $post->body = $valid['body'];
+//        $post->user_id = $valid['user_id'];
+//        if ($post->save()) {
+//            return redirect('/');
+//        }
+
         return back()->withInput();
     }
 
@@ -77,7 +86,7 @@ class PostController extends Controller
     {
         // Increment the post view
         $post->update([$post->views++]);
-        
+
         return view('posts.single', [
             'title' => $post->title,
             'post' => $post,
