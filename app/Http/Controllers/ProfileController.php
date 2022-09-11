@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['show']);
+        $this->middleware('auth')->except(['show', 'archive']);
     }
     /**
      * Display a listing of the resource.
@@ -20,9 +20,21 @@ class ProfileController extends Controller
     public function index(User $user, Post $post)
     {
         return view('profile.index', [
-            "title" => "Profile",
-            "user" => $user->whereId(auth()->id())->first(),
-            "posts" => $post->where('user_id', auth()->id())->paginate(5),
+            "title" => "Manage Profile",
+            "user" => $user->whereId(auth()->id())
+                ->first(),
+            "posts" => $post->where('user_id', auth()->id())
+                ->paginate(5),
+        ]);
+    }
+
+    public function archive(Post $post)
+    {
+        return view('profile.archive', [
+            "title" => "Post Archive",
+            "posts" => $post->where('user_id', auth()->id())
+                ->onlyTrashed()
+                ->paginate(5),
         ]);
     }
 

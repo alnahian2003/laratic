@@ -22,6 +22,13 @@ use Illuminate\Support\Str;
 Route::resource("posts", PostController::class);
 Route::resource('profile', ProfileController::class);
 
+// Restoring User's Post
+Route::get('archive', [ProfileController::class, 'archive'])->name('posts.archive');
+Route::post('restore/{id}', [PostController::class, 'restore'])->name('posts.restore');
+
+// Force Deleting User's Post
+Route::post('force/{id}', [PostController::class, 'force'])->name('posts.force_delete');
+
 Route::controller(UserController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', 'index')->name('login');

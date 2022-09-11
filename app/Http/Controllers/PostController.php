@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-
-    use SoftDeletes;
-
     public function __construct()
     {
         $this->middleware('auth')->except('index', 'show');
@@ -184,6 +181,39 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->deleteOrFail();
+
+        return back();
+    }
+
+    /**
+     * Restore a specific post
+     *
+     * @param  int  $id
+     */
+    public function restore($id)
+    {
+        $post = Post::onlyTrashed()->findOrFail($id);
+        if ($post->restore()) {
+            return back();
+        }
+
+        return $post;
+    }
+
+    /**
+     * Restore a specific post
+     *
+     * @param  int  $id
+     */
+    public function force($id)
+    {
+        $post = Post::onlyTrashed()->findOrFail($id);
+        
+        if ($post->forceDelete()) {
+            return back();
+        }
+
+        return $post;
     }
 }

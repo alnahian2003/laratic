@@ -1,7 +1,4 @@
 @extends('posts/template')
-<!-- component -->
-<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
-
 <main class="profile-page">
   <section class="relative py-16 bg-blueGray-200">
     <div class="container mx-auto px-4">
@@ -35,6 +32,9 @@
                   <table class="w-full text-sm text-left text-gray-500">
                       <thead class="text-xs text-neutral-base uppercase bg-neutral">
                           <tr>
+                            <th scope="col" class="py-3 px-6">
+                              ID
+                          </th>
                               <th scope="col" class="py-3 px-6">
                                   Title
                               </th>
@@ -52,11 +52,13 @@
                       <tbody>
                         @forelse ($posts as $post)
                         <tr class="bg-base border-b">
+                          <td class="py-4 px-6">
+                            {{$loop->iteration}}
+                          </td>
                           <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-neutral-content">
                             <a class="hover:underline" href="{{route('posts.show', $post->id)}}" target="_blank">
                               {{substr($post->title, 0, 50)}}...
                             </a>
-                              
                           </th>
                           <td class="py-4 px-6">
                               {{$post->created_at->diffForHumans()}}
@@ -65,10 +67,10 @@
                               {{$post->views}}
                           </td>
                           <td class="py-4 px-6 flex flex-row gap-4">
-                            <form action="{{route('posts.edit', $post->id)}}" method="post">
-                              @csrf
-                              <input class="btn btn-info btn-sm" type="submit" value="Edit">
-                            </form>
+                            @if ($post->trashed())
+                            <a href="{{route('posts.archive')}}" class="btn btn-success btn-sm">Archive</a>
+                            @endif
+                            <a href="{{route('posts.edit', $post->id)}}" class="btn btn-info btn-sm">Edit</a>
                             <form action="{{route('posts.destroy', $post->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
