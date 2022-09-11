@@ -6,7 +6,9 @@
             <article class="post my-10 border-b border-b-white/20">
                 @auth
                     @if($post->user_id == auth()->user()->id)
-                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline">edit Post</a>
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-outline">Edit Post</a>
+
+                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-danger btn-outline ml-2">Delete Post</a>
                     @endif
                 @endauth
                 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -19,6 +20,7 @@ use Illuminate\Support\Str;
 */
 
 Route::resource("posts", PostController::class);
+Route::resource('profile', ProfileController::class);
 
 Route::controller(UserController::class)->group(function () {
     Route::middleware('guest')->group(function () {
@@ -164,8 +166,8 @@ Route::get('search/{search?}', function ($search = '') {
 
 Route::get('delete', function () {
     // Deleting An Existing Model By Its Primary Key
-    if(\App\Models\Post::destroy( collect([1,2,3]) )) {
+    if (\App\Models\Post::destroy(collect([1, 2, 3]))) {
         return "Posts Deleted";
     }
-        return "Posts Doesn't Exists";
+    return "Posts Doesn't Exists";
 });
