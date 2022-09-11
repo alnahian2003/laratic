@@ -8,12 +8,15 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+
+    use SoftDeletes;
 
     public function __construct()
     {
@@ -71,13 +74,13 @@ class PostController extends Controller
         }
 
         /* We can use the insert() method to store as well */
-//        $post = new Post;
-//        $post->title = $valid['title'];
-//        $post->body = $valid['body'];
-//        $post->user_id = $valid['user_id'];
-//        if ($post->save()) {
-//            return redirect('/');
-//        }
+        //        $post = new Post;
+        //        $post->title = $valid['title'];
+        //        $post->body = $valid['body'];
+        //        $post->user_id = $valid['user_id'];
+        //        if ($post->save()) {
+        //            return redirect('/');
+        //        }
 
         return back()->withInput();
     }
@@ -116,8 +119,8 @@ class PostController extends Controller
 
         if ($this->authorize('update', $post)) {
             return view('posts.edit', [
-                'title'=>'Edit Post',
-                'post'=> $post,
+                'title' => 'Edit Post',
+                'post' => $post,
             ]);
         }
         // if ($request->user()->cannot('update', $post)) {
@@ -143,15 +146,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        if ($post->user_id === auth()->user()->id){
-            $validator = Validator::make($request->all(),
+        if ($post->user_id === auth()->user()->id) {
+            $validator = Validator::make(
+                $request->all(),
                 [
                     'title' => 'required|max:255',
                     'body' => 'required',
                     'cover' => 'image|max:10240|mimes:jpg,png,gif',
-                ]);
+                ]
+            );
 
-            if ($validator->fails()){
+            if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
 
