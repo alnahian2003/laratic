@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, Prunable;
+    use HasFactory, SoftDeletes, MassPrunable;
 
     /**
      * The table associated with the model.
@@ -67,6 +67,6 @@ class Post extends Model
 
     public function prunable()
     {
-        return static::where("created_at", "<=", now()->subDays(4));
+        return static::where("created_at", ">", now()->subMinutes(30));
     }
 }
