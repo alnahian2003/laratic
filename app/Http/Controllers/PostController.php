@@ -209,11 +209,29 @@ class PostController extends Controller
     public function force($id)
     {
         $post = Post::onlyTrashed()->findOrFail($id);
-        
+
         if ($post->forceDelete()) {
             return back();
         }
 
         return $post;
+    }
+
+    /**
+     * Clone/Replicate a post
+     *
+     * @param  int  $id
+     */
+    public function clone($id)
+    {
+        $post = Post::findOrFail($id);
+
+        $new_post = $post->replicate();
+
+        if ($new_post->save()) {
+            return back();
+        }
+
+        return abort(404);
     }
 }

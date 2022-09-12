@@ -70,12 +70,19 @@
                             @if ($post->trashed())
                             <a href="{{route('posts.archive')}}" class="btn btn-success btn-sm">Archive</a>
                             @endif
+
+                          <form action="{{route('posts.clone', $post->id)}}" method="post">
+                              @csrf
+                              <input class="btn btn-warning btn-sm" type="submit" value="Clone">
+                          </form>
+
+
                             <a href="{{route('posts.edit', $post->id)}}" class="btn btn-info btn-sm">Edit</a>
                             <form action="{{route('posts.destroy', $post->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input class="btn btn-error btn-sm" type="submit" value="Delete">
-                              </form>
+                            </form>
                           </td>
                       </tr>
                         @empty

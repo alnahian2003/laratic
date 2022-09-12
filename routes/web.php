@@ -29,6 +29,9 @@ Route::post('restore/{id}', [PostController::class, 'restore'])->name('posts.res
 // Force Deleting User's Post
 Route::post('force/{id}', [PostController::class, 'force'])->name('posts.force_delete');
 
+// Force Deleting User's Post
+Route::post('clone/{id}', [PostController::class, 'clone'])->name('posts.clone');
+
 Route::controller(UserController::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', 'index')->name('login');
