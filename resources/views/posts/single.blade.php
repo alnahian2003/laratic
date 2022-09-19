@@ -65,4 +65,24 @@
                 </p>
             </article>
     </section>
+
+
+    <section id="comments">
+        <h1 class="divider text-2xl">Leave a Comment</h1>
+        
+
+        <!-- comment form -->
+        <x-comment-form/>
+
+        @forelse ($post->comments as $comment)
+            <article class="post my-5 border-b border-b-white/20 p-3 space-y-3">
+                <img alt="..." src="https://eu.ui-avatars.com/api/?name={{ $comment->user->username }}&format=svg&background=random&size=60" class="shadow-xl rounded-full h-auto align-middle border-none max-w-150-px">
+                <strong>{{$comment->user->username}}</strong>
+                <p>{{$comment->body}}</p>
+            </article>
+        @empty
+            <p class="text-success text-center font-bold">Be the first one to comment on this post.</p>
+        @endforelse
+    </section>
 @endsection
+

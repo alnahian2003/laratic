@@ -181,3 +181,22 @@ Route::get('delete', function () {
     }
     return "Posts Doesn't Exists";
 });
+
+
+Route::get('details', function () {
+    // Get all Comments of a specific post
+    // $post = App\Models\Post::findOrFail(160);
+    // dd($post->comments);
+
+    // Get all comments by a user
+    // $user = App\Models\User::findOrFail(757);
+    // dd($user->comments);
+
+    // Get post of a specific comment
+    $post = App\Models\Comment::findOrFail(1);
+
+    return $post->post;
+
+    // Get all comments
+    return App\Models\Comment::all();
+});
