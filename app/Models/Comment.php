@@ -17,7 +17,7 @@ class Comment extends Model
      * 
      * @var array
      */
-    protected $touches = ['post', 'user'];
+    protected $touches = ['post'];
 
     public function user()
     {

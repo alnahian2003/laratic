@@ -193,10 +193,10 @@ Route::get('details', function () {
     // dd($user->comments);
 
     // Get post of a specific comment
-    $post = App\Models\Comment::findOrFail(1);
+    // $post = App\Models\Comment::findOrFail(1);
 
-    return $post->post;
+    // return $post->post;
 
     // Get all comments
-    return App\Models\Comment::all();
+    // return App\Models\Comment::all();
 });
