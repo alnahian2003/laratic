@@ -199,4 +199,12 @@ Route::get('details', function () {
 
     // Get all comments
     // return App\Models\Comment::all();
+
+
+    // Querying Belongs To Relationships
+    // $user = App\Models\User::findOrFail(700);
+    // return App\Models\Post::whereBelongsTo($user)->get();
+
+    // get all comments belongs to a post 
+    // return App\Models\Comment::whereBelongsTo($post)->get();
 });
