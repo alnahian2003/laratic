@@ -208,3 +208,43 @@ Route::get('details', function () {
     // get all comments belongs to a post 
     // return App\Models\Comment::whereBelongsTo($post)->get();
 });
+
+Route::get('eager', function () {
+    // $posts = App\Models\Post::has('comments')
+    //     ->with(['comments' => ['user']])
+    //     ->latest('id')
+    //     ->get();
+
+    // // return $posts[1]->comments[0]->user;
+
+    // foreach ($posts as $post) {
+    //     echo "<pre><code>";
+    //     // print_r($post);
+    //     foreach ($post->comments as $comment) {
+    //         print_r($comment);
+    //         print_r($comment->user);
+    //     }
+    //     echo "</code></pre>";
+    // };
+
+    // Eager Loading Specific Columns
+    // never forget to include the relevant foreign key
+    // return $users = App\Models\User::has('post')
+    //     ->with(['post:id,user_id,title,body', 'comments:id,user_id,post_id'])
+    //     ->latest('id')
+    //     ->get();
+
+
+    // Using Eager Loading Constraints
+    return $posts = App\Models\Post::has('comments')
+        ->with([
+            'comments' => function ($query) {
+                $query->where('user_id', '>', 750)->orderBy('created_at', 'desc');
+            }
+
+        ])
+        ->latest('id')
+        ->get();
+
+    print_r($posts);
+});
