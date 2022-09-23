@@ -236,15 +236,15 @@ Route::get('eager', function () {
 
 
     // Using Eager Loading Constraints
-    return $posts = App\Models\Post::has('comments')
-        ->with([
-            'comments' => function ($query) {
-                $query->where('user_id', '>', 750)->orderBy('created_at', 'desc');
-            }
+    // return $posts = App\Models\Post::has('comments')
+    //     ->with([
+    //         'comments' => function ($query) {
+    //             $query->where('user_id', '>', 750)->orderBy('created_at', 'desc');
+    //         }
 
-        ])
-        ->latest('id')
-        ->get();
+    //     ])
+    //     ->latest('id')
+    //     ->get();
 
-    print_r($posts);
+    // print_r($posts);
 });
