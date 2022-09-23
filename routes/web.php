@@ -286,8 +286,14 @@ Route::get('playground', function () {
 
 
     // using the create() method... createMany() also works in the same way
-    return $post->comments()->create([
-        'body' => 'Pretty New Wholesome Comment',
-        'user_id' => 23
-    ]);
+    // return $post->comments()->create([
+    //     'body' => 'Pretty New Wholesome Comment',
+    //     'user_id' => 23
+    // ]);
+
+
+
+    // Attach, Detach, Sync, Toggle and more...
+    $user = App\Models\User::findOrFail(113);
+    
 });
