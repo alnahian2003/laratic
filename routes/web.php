@@ -184,67 +184,103 @@ Route::get('delete', function () {
 
 
 // Route::get('details', function () {
-    // Get all Comments of a specific post
-    // $post = App\Models\Post::findOrFail(160);
-    // dd($post->comments);
+// Get all Comments of a specific post
+// $post = App\Models\Post::findOrFail(160);
+// dd($post->comments);
 
-    // Get all comments by a user
-    // $user = App\Models\User::findOrFail(757);
-    // dd($user->comments);
+// Get all comments by a user
+// $user = App\Models\User::findOrFail(757);
+// dd($user->comments);
 
-    // Get post of a specific comment
-    // $post = App\Models\Comment::findOrFail(1);
+// Get post of a specific comment
+// $post = App\Models\Comment::findOrFail(1);
 
-    // return $post->post;
+// return $post->post;
 
-    // Get all comments
-    // return App\Models\Comment::all();
+// Get all comments
+// return App\Models\Comment::all();
 
 
-    // Querying Belongs To Relationships
-    // $user = App\Models\User::findOrFail(700);
-    // return App\Models\Post::whereBelongsTo($user)->get();
+// Querying Belongs To Relationships
+// $user = App\Models\User::findOrFail(700);
+// return App\Models\Post::whereBelongsTo($user)->get();
 
-    // get all comments belongs to a post 
-    // return App\Models\Comment::whereBelongsTo($post)->get();
+// get all comments belongs to a post 
+// return App\Models\Comment::whereBelongsTo($post)->get();
 // });
 
 // Route::get('eager', function () {
-    // $posts = App\Models\Post::has('comments')
-    //     ->with(['comments' => ['user']])
-    //     ->latest('id')
-    //     ->get();
+// $posts = App\Models\Post::has('comments')
+//     ->with(['comments' => ['user']])
+//     ->latest('id')
+//     ->get();
 
-    // // return $posts[1]->comments[0]->user;
+// // return $posts[1]->comments[0]->user;
 
-    // foreach ($posts as $post) {
-    //     echo "<pre><code>";
-    //     // print_r($post);
-    //     foreach ($post->comments as $comment) {
-    //         print_r($comment);
-    //         print_r($comment->user);
-    //     }
-    //     echo "</code></pre>";
-    // };
+// foreach ($posts as $post) {
+//     echo "<pre><code>";
+//     // print_r($post);
+//     foreach ($post->comments as $comment) {
+//         print_r($comment);
+//         print_r($comment->user);
+//     }
+//     echo "</code></pre>";
+// };
 
-    // Eager Loading Specific Columns
-    // never forget to include the relevant foreign key
-    // return $users = App\Models\User::has('post')
-    //     ->with(['post:id,user_id,title,body', 'comments:id,user_id,post_id'])
-    //     ->latest('id')
-    //     ->get();
+// Eager Loading Specific Columns
+// never forget to include the relevant foreign key
+// return $users = App\Models\User::has('post')
+//     ->with(['post:id,user_id,title,body', 'comments:id,user_id,post_id'])
+//     ->latest('id')
+//     ->get();
 
 
-    // Using Eager Loading Constraints
-    // return $posts = App\Models\Post::has('comments')
-    //     ->with([
-    //         'comments' => function ($query) {
-    //             $query->where('user_id', '>', 750)->orderBy('created_at', 'desc');
-    //         }
+// Using Eager Loading Constraints
+// return $posts = App\Models\Post::has('comments')
+//     ->with([
+//         'comments' => function ($query) {
+//             $query->where('user_id', '>', 750)->orderBy('created_at', 'desc');
+//         }
 
-    //     ])
-    //     ->latest('id')
-    //     ->get();
+//     ])
+//     ->latest('id')
+//     ->get();
 
-    // print_r($posts);
+// print_r($posts);
 // });
+
+
+// Inserting & Updating Related Models
+Route::get('playground', function () {
+    $post = App\Models\Post::findOrFail(183);
+
+    // $comment = new App\Models\Comment;
+    // $comment->body = "This article is awesome!";
+    // $comment->user_id = 11;
+
+    // // save the new comment with `user_id`
+    // return $post->comments()->save($comment);
+
+    // $post->comments()->saveMany([
+    //     new App\Models\Comment([
+    //         'body' => "I'm About to End This Man's Whole Career",
+    //         'user_id' => 11
+    //     ]),
+    //     new App\Models\Comment([
+    //         'body' => "Ah Buddy! Whatcha doin?",
+    //         'user_id' => 12
+    //     ])
+    // ]);
+
+    // $post->refresh();
+
+    // return $post->comments;
+
+
+    // Recursively Saving Models & Relationships
+    // $post->comments[0]->body = 'Whaaaaaaaaaaaaaat!';
+
+    // $post->comments[0]->user->name = 'Al Nahian Gazi';
+
+    // return $post;
+});

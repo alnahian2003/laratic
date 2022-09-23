@@ -19,6 +19,12 @@ class Comment extends Model
      */
     protected $touches = ['post'];
 
+    protected $fillable = [
+        'body',
+        'user_id',
+        'post_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
