@@ -294,6 +294,17 @@ Route::get('playground', function () {
 
 
     // Attach, Detach, Sync, Toggle and more...
-    $user = App\Models\User::findOrFail(113);
-    
+    $user = App\Models\User::findOrFail(663);
+
+    // Post id 116 of user 11
+    $post = App\Models\Post::findOrFail(117);
+
+    // Attach
+
+    // $post->user()->associate($user);
+    // $post->user()->dissociate();
+    // $post->save();
+
+    // get all posts by the user
+    // print_r($user->post);
 });
