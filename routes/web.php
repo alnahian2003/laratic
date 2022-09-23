@@ -252,7 +252,7 @@ Route::get('delete', function () {
 
 // Inserting & Updating Related Models
 Route::get('playground', function () {
-    $post = App\Models\Post::findOrFail(183);
+    // $post = App\Models\Post::findOrFail(183);
 
     // $comment = new App\Models\Comment;
     // $comment->body = "This article is awesome!";
@@ -294,12 +294,10 @@ Route::get('playground', function () {
 
 
     // Attach, Detach, Sync, Toggle and more...
-    $user = App\Models\User::findOrFail(663);
+    // $user = App\Models\User::findOrFail(663);
 
     // Post id 116 of user 11
-    $post = App\Models\Post::findOrFail(117);
-
-    // Attach
+    // $post = App\Models\Post::findOrFail(117);
 
     // $post->user()->associate($user);
     // $post->user()->dissociate();
@@ -307,4 +305,29 @@ Route::get('playground', function () {
 
     // get all posts by the user
     // print_r($user->post);
+
+
+
+
+
+    // ------------ Aggregating Related Models ------------
+
+    // Counting total comments of all posts
+    // return App\Models\Comment::count();
+
+    // Counting total comments of a post
+    // $posts = App\Models\Post::latest()->has('comments')->withCount('comments as count');
+    // foreach ($posts as  $post) {
+    //     echo "$post->id = $post->comments_count <br>";
+    // };
+
+    // this will work
+    // echo "Post {$posts[20]->id} = Total Comments {$posts[20]->count} <br>";
+
+    // this will also work... cool
+    // return App\Models\Post::findOrFail(183)->comments->count();
+
+
+    // other aggregate functions
+    // return App\Models\Post::findOrFail(183)->withExists('user')->get();
 });
