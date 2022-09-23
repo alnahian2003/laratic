@@ -183,7 +183,7 @@ Route::get('delete', function () {
 });
 
 
-Route::get('details', function () {
+// Route::get('details', function () {
     // Get all Comments of a specific post
     // $post = App\Models\Post::findOrFail(160);
     // dd($post->comments);
@@ -207,9 +207,9 @@ Route::get('details', function () {
 
     // get all comments belongs to a post 
     // return App\Models\Comment::whereBelongsTo($post)->get();
-});
+// });
 
-Route::get('eager', function () {
+// Route::get('eager', function () {
     // $posts = App\Models\Post::has('comments')
     //     ->with(['comments' => ['user']])
     //     ->latest('id')
@@ -247,4 +247,4 @@ Route::get('eager', function () {
     //     ->get();
 
     // print_r($posts);
-});
+// });

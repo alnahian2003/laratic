@@ -29,7 +29,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest('id')->paginate(10)->withQueryString();
+        $posts = Post::latest('id')->with('user')->paginate(10)->withQueryString();
 
         return view('posts.all_posts', [
             'posts' => $posts,
