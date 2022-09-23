@@ -283,4 +283,11 @@ Route::get('playground', function () {
     // $post->comments[0]->user->name = 'Al Nahian Gazi';
 
     // return $post;
+
+
+    // using the create() method... createMany() also works in the same way
+    return $post->comments()->create([
+        'body' => 'Pretty New Wholesome Comment',
+        'user_id' => 23
+    ]);
 });
