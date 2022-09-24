@@ -59,6 +59,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class)
             ->as('role')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderByPivot('created_at', 'desc');
     }
 }
