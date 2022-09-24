@@ -361,4 +361,22 @@ Route::get('playground', function () {
     //     $query->where('body', 'like', '%a%');
     // }, '>=', 5)->get();
 
+
+
+
+
+    // Inline Relationship Existence Queries
+
+    // return App\Models\Post::whereRelation('comments', 'deleted_at', null)->get();
+
+    // return App\Models\Post::whereRelation('comments', 'user_id', 11)->get();
+
+
+    // ----- Querying Relationship Absence -----
+
+
+    // retrieve all blog posts that don't have any comments.
+    return App\Models\Post::doesntHave('comments')->withCount('comments')->get();
+
+    // and the rests are as same as querying relationship existence
 });
