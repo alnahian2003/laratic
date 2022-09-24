@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -310,7 +311,7 @@ Route::get('playground', function () {
 
 
 
-    // ------------ Aggregating Related Models ------------
+    // ------ Aggregating Related Models ------
 
     // Counting total comments of all posts
     // return App\Models\Comment::count();
@@ -330,4 +331,34 @@ Route::get('playground', function () {
 
     // other aggregate functions
     // return App\Models\Post::findOrFail(183)->withExists('user')->get();
+
+
+    // ----- Querying Relationship Existence -----
+
+    // Get all users those who have atleast 2 posts
+    // $users = App\Models\User::has('post', '>=', 2)->get();
+
+    // return $users;
+
+    // nested has
+
+    // get users those who have posts with comments
+    // $posts = App\Models\Post::has('comments')->with('user')->withCount('comments')
+    //     ->get();
+
+    // print_r($posts);
+
+
+    // Retrieve posts with at least one comment containing words like %a%...
+    // $posts = App\Models\Post::whereHas('comments', function (Builder $query) {
+    //     $query->where('body', 'like', '%a%');
+    // })->get();
+
+    // return ($posts);
+
+    // Retrieve posts with at least five comments containing words like awe%...
+    // return App\Models\Post::whereHas('comments', function (Builder $query) {
+    //     $query->where('body', 'like', '%a%');
+    // }, '>=', 5)->get();
+
 });
