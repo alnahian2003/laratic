@@ -376,7 +376,13 @@ Route::get('playground', function () {
 
 
     // retrieve all blog posts that don't have any comments.
-    return App\Models\Post::doesntHave('comments')->withCount('comments')->get();
+    // return App\Models\Post::doesntHave('comments')->withCount('comments')->get();
 
     // and the rests are as same as querying relationship existence
+
+
+
+
+    // Many To Many Relationships
+    
 });
