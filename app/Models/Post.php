@@ -50,7 +50,6 @@ class Post extends Model
         'title',
         'user_id',
         'body',
-        'cover'
     ];
 
     public function user()
@@ -61,6 +60,14 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get the post's image.
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 

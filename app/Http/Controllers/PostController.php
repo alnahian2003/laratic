@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
@@ -58,15 +59,21 @@ class PostController extends Controller
     {
         $valid = $request->validated();
 
-        // Upload logo to file
-        if ($request->hasFile('cover')) {
-            $valid['cover'] = $request->file('cover')->store('cover', 'public');
-        }
-
         // Set the user_id column to the current auth user id
         $valid['user_id'] = auth()->id();
 
-        if (Post::create($valid)) {
+        $post = Post::create($valid);
+
+        // Upload post image to file
+        if ($request->hasFile('cover')) {
+            // store in image pivot table
+            $post->image()->create([
+                'url' => $request->file('cover')->store('cover', 'public')
+            ]);
+            // $valid['cover'] = $request->file('cover')->store('cover', 'public');
+        }
+
+        if ($post) {
             return redirect('/');
         }
 
@@ -159,12 +166,29 @@ class PostController extends Controller
 
             // get the fresh validated input
             $valid = $validator->validated();
-            // Upload logo to file
-            if ($request->hasFile('cover')) {
-                $valid['cover'] = $request->file('cover')->store('cover', 'public');
-            }
+
+            // remove the cover key from validated data
+            // just because we'll update the image manually
+            unset($valid['cover']);
+
 
             if (Post::where('id', $post->id)->update($valid)) {
+
+                // Edit the cover image
+                if ($request->hasFile('cover')) {
+                    // edit the image pivot table row
+                    if ($post->image != null) {
+                        $post->image()->where('imageable_id', $post->id)->update([
+                            'imageable_id' => $post->id,
+                            'url' => $request->file('cover')->store('cover', 'public')
+                        ]);
+                    } else {
+                        $post->image()->create([
+                            'url' => $request->file('cover')->store('cover', 'public')
+                        ]);
+                    }
+                }
+
                 // redirect to the updated post
                 return to_route('posts.show', $post->id);
             }

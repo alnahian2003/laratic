@@ -1,5 +1,4 @@
 @extends('posts/template')
-
 @section('posts')
     <section id="post">
             <!-- Post -->
@@ -52,11 +51,11 @@
                 </div>
 
                 {{-- Post Cover Image (Only if exists) --}}
-                @if ($post->cover !== null && file_exists(public_path('storage/'.$post->cover)))
-                    <img class="max-w-full mx-auto rounded-lg object-cover" src="{{asset('storage/'.$post->cover)}}" alt="Post By {{$post->user->name}}" loading="lazy">
+                @if ($post->image !== null && file_exists(public_path('storage/'.$post->image->url)))
+                    <img class="max-w-full mx-auto rounded-lg object-cover" src="{{asset('storage/'.$post->image->url)}}" alt="Post By {{$post->user->name}}" loading="lazy">
 
-                @elseif($post->cover !== null)
-                <img class="max-w-full mx-auto rounded-lg object-cover" src="{{$post->cover}}" alt="Post By {{$post->user->name}}" loading="lazy">
+                @elseif($post->image !== null)
+                <img class="max-w-full mx-auto rounded-lg object-cover" src="{{$post->image->url}}" alt="Post By {{$post->user->name}}" loading="lazy">
                 @endif
 
                 <!-- Post Content -->

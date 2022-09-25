@@ -383,6 +383,37 @@ Route::get('playground', function () {
 
 
 
-    // Many To Many Relationships
-    
+    // ----- Many To Many Relationships -----
+
+    // get a user's roles
+    // return $user = App\Models\User::findOrFail(11)->has('roles')->with('roles')->get();
+
+
+
+
+    // ----- Polymorphic Relationships -----
+
+    // One To One (Polymorphic)
+    // return App\Models\User::find(11)->image;
+
+
+
+    // Migrate all the current posts urls in the images table
+    // $posts = App\Models\Post::where('cover', '!=', null)->get();
+    // $data = [];
+    // foreach ($posts as $post) {
+    //     $data[] = [
+    //         'id' => $post->id,
+    //         'cover' => $post->cover
+    //     ];
+    // }
+    // foreach ($data as $input) {
+    //     App\Models\Image::insert([
+    //         'url' => $input['cover'],
+    //         'imageable_id' => $input['id'],
+    //         'imageable_type' => 'App\Models\Post'
+    //     ]);
+    // }
+
+    return App\Models\Post::findOrfail(112)->image;
 });

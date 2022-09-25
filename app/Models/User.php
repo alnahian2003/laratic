@@ -62,4 +62,12 @@ class User extends Authenticatable
             ->orderByPivot('created_at', 'desc')
             ->withTimestamps();
     }
+
+    /**
+     * Get the user's image.
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }
