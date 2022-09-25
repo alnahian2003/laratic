@@ -417,5 +417,28 @@ Route::get('playground', function () {
 
     // return App\Models\Post::findOrfail(112)->image;
 
-    return App\Models\Post::find(183)->tags;
+    // return App\Models\Post::find(191)->tags;
+    // return App\Models\Tag::find(2)->posts;
+
+
+    // CREATE A NEW POST AND ADD A TAG WITH IT
+
+    // $newPost = new App\Models\Post([
+    //     'title' => 'Taggable Testing With Polymorphic Many To Many Relationship',
+    //     'body' => 'Testing Testing Testing',
+    //     'user_id' => 11
+    // ]);
+
+    // $newPost->save();
+
+    // $newPost->tags()->create(['name' => 'trending, testing', 'taggable_id' => $newPost->id]);
+
+    // return $newPost;
+
+
+
+    // return App\Models\Post::find(183)->tags;
+    // return App\Models\Tag::find(1)->posts;
+
+    // Alhamdulillah!
 });
