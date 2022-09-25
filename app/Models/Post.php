@@ -86,6 +86,14 @@ class Post extends Model
         return $this->morphOne(Image::class, 'imageable')->oldestOfMany();
     }
 
+    /**
+     * Get all tags of the post.
+     */
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable')->as('taggable');
+    }
+
 
     /**
      * Get the prunable model query.

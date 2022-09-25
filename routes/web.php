@@ -415,5 +415,7 @@ Route::get('playground', function () {
     //     ]);
     // }
 
-    return App\Models\Post::findOrfail(112)->image;
+    // return App\Models\Post::findOrfail(112)->image;
+
+    return App\Models\Post::find(183)->tags;
 });
