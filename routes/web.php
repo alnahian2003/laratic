@@ -442,3 +442,6 @@ Route::get('playground', function () {
 
     // Alhamdulillah!
 });
+
+
+Route::get('test', App\Http\Controllers\TestController::class)->middleware('auth');
