@@ -17,7 +17,7 @@ class Comment extends Model
      * 
      * @var array
      */
-    protected $touches = ['post'];
+    // protected $touches = ['post'];
 
     protected $fillable = [
         'body',

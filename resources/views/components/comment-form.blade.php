@@ -1,5 +1,5 @@
 <div class="flex mx-auto items-center justify-center mt-5  mb-4 max-w-full">
-    <form class="w-full max-w-xl bg-gray-800 rounded-lg px-4 pt-2" method="POST">
+    <form class="w-full max-w-xl bg-gray-800 rounded-lg px-4 pt-2" method="POST" action="{{ route('comments.store') }}">
         <div class="flex flex-wrap -mx-3 mb-6">
             <label for="commentbox" class="hover:cursor-pointer">
                 <h2 class="px-4 pt-3 pb-2 text-gray-300 text-lg">Add a new comment</h2>

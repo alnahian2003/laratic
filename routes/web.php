@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -19,6 +20,8 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource('comments', CommentController::class)->only(['index', 'store', 'update', 'destroy']);
 
 Route::resource("posts", PostController::class);
 Route::resource('profile', ProfileController::class);

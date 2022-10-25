@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['store', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +41,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create');
+        if ($request->user()->cannot('create', Comment::class)) {
+            abort(403);
+        }
 
-        
+        // Create the comment
+        $validated = validator($request->only(['body']), ['body' => 'required|string'], ['body' => 'comment'])->validated();
+
+        $validated['user_id'] = auth()->id;
+
+        if (Comment::create($validated)) {
+            return back();
+        };
+
+        return back()->withErrors($request);
     }
 
     /**
