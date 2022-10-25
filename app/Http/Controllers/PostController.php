@@ -12,6 +12,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -30,7 +31,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest('id')->with('user')->paginate(10)->withQueryString();
+        $posts = Post::latest('id')->with('user')->paginate(30);
 
         return view('posts.all_posts', [
             'posts' => $posts,
@@ -205,8 +206,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->deleteOrFail();
+        Gate::authorize('delete-post', $post);
 
+        $post->deleteOrFail();
         return back();
     }
 

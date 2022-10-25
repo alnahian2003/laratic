@@ -29,6 +29,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Gate::before(function () {
+        //     return auth()->user()->username === 'alnahian2003';
+        // });
+
+        Gate::define('edit-post', function (User $user, Post $post) {
+            return $user->id === $post->user_id;
+        });
+
         Gate::define('delete-post', function (User $user, Post $post) {
             return $user->id === $post->user_id;
         });
