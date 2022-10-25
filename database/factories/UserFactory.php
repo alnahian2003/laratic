@@ -40,4 +40,15 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Al Nahian',
+                'username' => 'alnahian2003',
+                'email' => 'alnahian2003@gmail.com',
+            ];
+        });
+    }
 }

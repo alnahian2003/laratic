@@ -39,7 +39,7 @@
     @if (!request()->routeIs('create'))
     <input type="checkbox" id="create-post-modal" class="modal-toggle" />
     <div class="modal">
-      <div class="modal-box w-6/12 max-w-5xl relative">
+      <div class="modal-box md:w-6/12 md:max-w-5xl relative">
         <label for="create-post-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
         
         <h3 class="text-2xl font-bold mb-5">Write a Post Instantly ✨</h3>
