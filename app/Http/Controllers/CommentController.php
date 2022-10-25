@@ -12,6 +12,8 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only(['store', 'update', 'destroy']);
+
+        $this->authorizeResource(Comment::class, 'comment');
     }
     /**
      * Display a listing of the resource.
