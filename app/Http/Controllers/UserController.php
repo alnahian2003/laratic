@@ -53,7 +53,7 @@ class UserController extends Controller
         if (auth()->attempt($validated, $remember)) {
             session()->regenerate();
 
-            Log::info("A New User Just Logged In", [$validated['username']]);
+            Log::channel('users')->info("A User Just Logged In", [$validated['username']]);
 
             return redirect()->intended();
         }
@@ -106,7 +106,7 @@ class UserController extends Controller
         // Login the registered user
         auth()->login($user, true);
 
-        Log::info('A New User Has Been Registered', [$validated['username']]);
+        Log::channel('users')->info('A New User Has Been Registered', [$validated['username']]);
 
         return redirect()->intended();
     }
@@ -148,18 +148,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param User $user
      * @return Application|Redirector|RedirectResponse
      */
-    public function logout(User $user)
+    public function logout()
     {
         if (auth()->check()) {
-            auth()->logout($user);
+            auth()->logout();
             session()->flush();
             session()->invalidate();
             session()->regenerateToken();
 
-            Log::info("An User Just Logged Out");
+            Log::channel('users')->info("A User Just Logged Out");
         }
 
         return redirect('/');
