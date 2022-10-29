@@ -449,3 +449,24 @@ Route::get('playground', function () {
 
 
 Route::get('test', App\Http\Controllers\TestController::class)->middleware('auth');
+
+
+
+// HTTP Client
+Route::get('kyc', function () {
+    // GET
+    // $response = Illuminate\Support\Facades\Http::get("https://jsonplaceholder.typicode.com/users");
+
+    // return $response->headers();
+    // return $response->json();
+
+
+    // POST
+    $response = Illuminate\Support\Facades\Http::retry(3, 100)->post("https://jsonplaceholder.typicode.com/users", [
+        'name' => 'Al Nahian'
+    ]);
+
+    if ($response['name'] === 'Al Nahian') {
+        return "You Are Verified";
+    }
+});
