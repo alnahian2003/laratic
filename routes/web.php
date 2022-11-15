@@ -481,3 +481,6 @@ Route::get('/users/{user}/tweets', function (User $user) {
 
     return $user->tweets()->get();
 });
+
+
+Route::get("tweets", fn () => Tweet::search()->orWhere->active()->get());

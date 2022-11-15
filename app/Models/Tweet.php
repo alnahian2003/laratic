@@ -30,6 +30,23 @@ class Tweet extends Model
         // static::addGlobalScope(new ActiveScope);
 
         // Anonymous Global Scope
-        static::addGlobalScope("inactive", fn (Builder $builder) => $builder->where("active", false));
+        /* static::addGlobalScope("inactive", fn (Builder $builder) => $builder->where("active", false)); */
+    }
+
+
+    /**
+     * Local Scope for Querying Active Records
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        $query->whereActive(true);
+    }
+
+    public function scopeSearch($query)
+    {
+        $query->when(request()->has("q"), fn ($query) => $query->where("content", "like", "%" . request("q") . "%"));
     }
 }
