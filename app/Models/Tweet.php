@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Scopes\ActiveScope;
+use App\Models\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
