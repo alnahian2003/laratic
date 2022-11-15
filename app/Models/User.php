@@ -63,6 +63,11 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
+
     /**
      * Get the user's image.
      */

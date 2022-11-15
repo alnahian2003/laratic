@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use App\Models\Tweet;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -469,4 +471,13 @@ Route::get('kyc', function () {
     if ($response['name'] === 'Al Nahian') {
         return "You Are Verified";
     }
+});
+
+// Get all "active" tweets by user
+Route::get('/users/{user}/tweets', function (User $user) {
+    // return $user->tweets()->get();
+
+    // return $user->tweets()->withOutGlobalScope("inactive")->get();
+
+    return $user->tweets()->get();
 });
