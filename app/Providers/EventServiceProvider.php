@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\CommentCreated;
+use App\Listeners\AlertAdminAboutNewComment;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        // My Very First Event in Laravel
+        CommentCreated::class => [
+            AlertAdminAboutNewComment::class,
+        ]
     ];
 
     /**
@@ -37,6 +44,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents()
     {
-        return false;
+        return true;
     }
 }

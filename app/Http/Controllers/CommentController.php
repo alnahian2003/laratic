@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentCreated;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -14,25 +15,6 @@ class CommentController extends Controller
         $this->middleware('auth')->only(['store', 'update', 'destroy']);
 
         $this->authorizeResource(Comment::class, 'comment');
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,45 +34,14 @@ class CommentController extends Controller
 
         $validated['user_id'] = auth()->user()->id;
 
-        if (Comment::create($validated)) {
+        if ($comment = Comment::create($validated)) {
+
+            CommentCreated::dispatch($comment); // fire the event
+
             return back();
         };
 
         return back()->withErrors($request);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Comment $comment)
-    {
-        //
     }
 
     /**
@@ -99,8 +50,8 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
-    {
-        //
-    }
+    // public function destroy(Comment $comment)
+    // {
+    //     //
+    // }
 }
