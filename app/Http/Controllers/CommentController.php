@@ -48,9 +48,9 @@ class CommentController extends Controller
         }
 
         // Create the comment
-        $validated = validator($request->only(['body']), ['body' => 'required|string'], ['body' => 'comment'])->validated();
+        $validated = validator($request->only(['body', 'post_id']), ['body' => 'required|string', 'post_id' => 'required|numeric'], ['body' => 'comment'])->validated();
 
-        $validated['user_id'] = auth()->id;
+        $validated['user_id'] = auth()->user()->id;
 
         if (Comment::create($validated)) {
             return back();
