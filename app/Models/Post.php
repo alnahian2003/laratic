@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\PostCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes, MassPrunable;
+
+
+    // The event map for the model
+    protected $dispatchesEvents = [
+        'created' => PostCreated::class,
+    ];
 
     /**
      * The table associated with the model.
@@ -104,5 +111,13 @@ class Post extends Model
     public function prunable()
     {
         return static::where("created_at", ">", now()->subMinutes(30));
+    }
+
+
+    protected static function booted()
+    {
+        self::retrieved(function ($post) {
+            info("Post {$post->id} was viewed by someone.");
+        });
     }
 }

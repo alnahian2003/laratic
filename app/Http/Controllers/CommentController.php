@@ -29,15 +29,17 @@ class CommentController extends Controller
             abort(403);
         }
 
-        // Create the comment
-        $validated = validator($request->only(['body', 'post_id']), ['body' => 'required|string', 'post_id' => 'required|numeric'], ['body' => 'comment'])->validated();
+        // Validate the comment
+        $validated = validator($request->only(['body', 'post_id']), ['body' => 'required|string|max:255', 'post_id' => 'required|numeric'], ['body' => 'comment'])->validated();
 
         $validated['user_id'] = auth()->user()->id;
 
+
+        // Try creating the comment
         if ($comment = Comment::create($validated)) {
 
-            CommentCreated::dispatch($comment); // fire the event
-
+            // CommentCreated::dispatch($comment); // fire the event
+            event(new CommentCreated($comment));
             return back();
         };
 

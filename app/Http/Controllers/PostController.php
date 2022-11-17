@@ -65,6 +65,10 @@ class PostController extends Controller
 
         $post = Post::create($valid);
 
+        // $post = Post::withoutEvents(function () use ($valid) {
+        //     Post::create($valid);
+        // });
+
         // Upload post image to file
         if ($request->hasFile('cover')) {
             // store in image pivot table
