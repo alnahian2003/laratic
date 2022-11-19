@@ -497,11 +497,14 @@ Route::get('notifications', function () {
 
 // Display Unread Notifications Only
 Route::get('unread', function () {
-    $unreadNotifications = auth()->user()->notifications->where('read_at', '===', null);
+    // $unreadNotifications = auth()->user()->notifications->where('read_at', '===', null);
 
     // foreach ($unreadNotifications as  $unreadNotification) {
     //     $unreadNotifications->markAsRead();
     // }
+
+    // easy way to get unread notifications
+    $unreadNotifications = auth()->user()->unreadNotifications;
 
     return $unreadNotifications;
 });
