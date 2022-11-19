@@ -26,7 +26,8 @@ class DbServiceProvider extends ServiceProvider
     {
         // Custom Polymorphic Types
         Relation::enforceMorphMap([
-            "post" => "App\Models\Post"
+            "post" => "App\Models\Post",
+            "user" => "App\Models\User",
         ]);
     }
 }

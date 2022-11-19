@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 use App\Notifications\PostCreatedNotification;
+use App\Notifications\PostDeletedNotification;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -82,7 +83,7 @@ class PostController extends Controller
         }
 
         if ($post) {
-            Notification::sendNow($post->user, new PostCreatedNotification($post));
+            // Notification::sendNow($post->user, new PostCreatedNotification($post));
             return redirect('/');
         }
 
@@ -216,7 +217,10 @@ class PostController extends Controller
     {
         Gate::authorize('delete-post', $post);
 
-        $post->deleteOrFail();
+        if ($post->deleteOrFail()) {
+            Notification::send(auth()->user(), new PostDeletedNotification($post));
+        };
+
         return back();
     }
 

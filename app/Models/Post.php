@@ -14,9 +14,9 @@ class Post extends Model
 
 
     // The event map for the model
-    protected $dispatchesEvents = [
-        'created' => PostCreated::class,
-    ];
+    // protected $dispatchesEvents = [
+    //     'created' => PostCreated::class,
+    // ];
 
     /**
      * The table associated with the model.

@@ -484,3 +484,36 @@ Route::get('/users/{user}/tweets', function (User $user) {
 
 
 Route::get("tweets", fn () => Tweet::search()->orWhere->active()->get());
+
+
+// Display All Notifications
+Route::get('notifications', function () {
+    $notifications = auth()->user()->notifications;
+
+    foreach ($notifications as $notification) {
+        echo $notification->data['author'];
+    }
+});
+
+// Display Unread Notifications Only
+Route::get('unread', function () {
+    $unreadNotifications = auth()->user()->notifications->where('read_at', '===', null);
+
+    // foreach ($unreadNotifications as  $unreadNotification) {
+    //     $unreadNotifications->markAsRead();
+    // }
+
+    return $unreadNotifications;
+});
+
+
+// Display Read Notifications Only
+Route::get('read', function () {
+    $unreadNotifications = auth()->user()->notifications()->delete();
+
+    if ($unreadNotifications) {
+        return "All Notifications Has Been Deleted";
+    }
+
+    return auth()->user()->notifications;
+});

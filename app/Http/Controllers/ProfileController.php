@@ -21,10 +21,8 @@ class ProfileController extends Controller
     {
         return view('profile.index', [
             "title" => "Manage Profile",
-            "user" => $user->whereId(auth()->id())
-                ->first(),
-            "posts" => $post->where('user_id', auth()->id())
-                ->paginate(5),
+            "user" => $user->whereId(auth()->id())->first(),
+            "posts" => $post->where('user_id', auth()->id())->orderByDesc('created_at')->paginate(5),
         ]);
     }
 
