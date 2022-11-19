@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Image;
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\PostCreatedNotification;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -79,6 +82,7 @@ class PostController extends Controller
         }
 
         if ($post) {
+            Notification::sendNow($post->user, new PostCreatedNotification($post));
             return redirect('/');
         }
 
