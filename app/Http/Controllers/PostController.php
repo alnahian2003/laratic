@@ -218,7 +218,11 @@ class PostController extends Controller
         Gate::authorize('delete-post', $post);
 
         if ($post->deleteOrFail()) {
+            // Sending notification using Facade
             Notification::send(auth()->user(), new PostDeletedNotification($post));
+
+            // Sending notification using the `notify` method
+            // auth()->user()->notify(new PostDeletedNotification($post));
         };
 
         return back();
