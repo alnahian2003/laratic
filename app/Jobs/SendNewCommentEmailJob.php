@@ -31,6 +31,7 @@ class SendNewCommentEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        // Log the info
+        info($this->comment);
     }
 }

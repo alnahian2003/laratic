@@ -26,6 +26,6 @@ class AlertAdminAboutNewComment
      */
     public function handle(CommentCreated $event)
     {
-        Mail::to("a.alnahian2003@gmail.com")->send(new SendNewCommentCreatedMailToAdmin($event));
+        Mail::to(auth()->user())->send(new SendNewCommentCreatedMailToAdmin($event));
     }
 }

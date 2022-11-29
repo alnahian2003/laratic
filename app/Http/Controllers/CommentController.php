@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\CommentCreated;
+use App\Jobs\SendNewCommentEmailJob;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -39,6 +40,8 @@ class CommentController extends Controller
         if ($comment = Comment::create($validated)) {
 
             // CommentCreated::dispatch($comment); // fire the event
+            SendNewCommentEmailJob::dispatch($comment); // dispatch the job
+
             event(new CommentCreated($comment));
             return back();
         };
